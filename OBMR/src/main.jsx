@@ -30,9 +30,10 @@ import ResetPass from "./pages/Login/ResetPass";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element: <AppLayout />, // Layout chính có Header, Footer
     children: [
+      // { path: "", element: <Login /> },
       { path: "", element: <Booking /> },
     ],
   },
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login", 
+    path: "/", 
     element: <Login />, // 
     // children: [
     //   { path: "", element: <Login /> }, // Trang Login
