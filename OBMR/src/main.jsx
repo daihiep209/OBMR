@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <AppLayout />, // Layout chính có Header, Footer
     children: [
-      { path: "booking", element: <Booking /> },
+      { path: "", element: <Booking /> },
     ],
   },
   {
