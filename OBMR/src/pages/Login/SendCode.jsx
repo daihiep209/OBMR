@@ -30,7 +30,7 @@ function SendCode() {
                 <div className="mt-3 text-center">
 
                     <p className="mt-2">
-                        Remember an account? <a href="/login" className=" form-label text-decoration-none">Login now</a>
+                        Remember an account? <a href="/" className=" form-label text-decoration-none">Login now</a>
                     </p>
                 </div>
             </div>

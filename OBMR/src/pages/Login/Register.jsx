@@ -96,7 +96,7 @@ function Register() {
                 <div className="mt-3 text-center">
 
                     <p className="mt-2">
-                        Already have an account? <a href="/login" className=" form-label text-decoration-none">Login now</a>
+                        Already have an account? <a href="/" className=" form-label text-decoration-none">Login now</a>
                     </p>
                 </div>
             </div>
