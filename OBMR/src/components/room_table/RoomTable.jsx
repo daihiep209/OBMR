@@ -4,7 +4,7 @@ import TableHead from "./TableHead";
 import RoomData from "./../../data/RoomData.json";
 import { Pagination } from "antd";
 
-const RoomTable = () => {
+const RoomTable = ({ roomData }) => {
     const [tableData] = useState(RoomData); // Dữ liệu gốc
     const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
     const [pageSize, setPageSize] = useState(5); // Số dòng mỗi trang

@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 
-const BookingForm = ({ onClose, onSubmit }) => {
+const BookingForm = ({ onClose, onSubmit, initialData = {}, readOnly = false  }) => {
   const [formData, setFormData] = useState({
     title: "",
     startDate: "",
@@ -10,6 +10,7 @@ const BookingForm = ({ onClose, onSubmit }) => {
     endTime: "",
     description: "",
     menber: "",
+    ...initialData,
   });
 
   const [startDate, setStartDate] = useState(format(new Date(), 'yyyy-MM-dd'));

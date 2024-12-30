@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "http://localhost:8080",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,11 +13,13 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@fortawesome/fontawesome-free": "^6.7.1",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@mui/material": "^6.2.0",
     "@mui/styled-engine-sc": "^6.2.0",
     "@mui/x-date-pickers": "^7.23.1",
     "@popperjs/core": "^2.11.8",
+    "@schedule-x/drag-and-drop": "^2.12.1",
+    "@schedule-x/event-modal": "^2.12.1",
     "@schedule-x/events-service": "^2.11.0",
     "@schedule-x/react": "^2.10.0",
     "@schedule-x/theme-default": "^2.11.0",
@@ -27,8 +30,10 @@
     "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.0.2",
-    "styled-components": "^6.1.13"
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.1.1",
+    "styled-components": "^6.1.13",
+    "sweetalert2": "^11.15.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
@@ -41,6 +46,5 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
     "vite": "^6.0.1"
-  },
-  "proxy": "http://localhost:8080"
+  }
 }

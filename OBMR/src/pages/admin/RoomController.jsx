@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RoomTable from "../../components/room_table/RoomTable";
 import "../../styles/RoomController.css"
 import AddRoomForm from "../../components/AddRoomForm";
+import axios from "axios";
 
 const RoomController = () => {
     const [isAddRoomVisible, setAddRoomVisible] = useState(false);
+    // const [roomData, setRoomData] = useState([]); // State để lưu danh sách phòng
+
+    // // Gọi API để lấy danh sách phòng
+    // useEffect(() => {
+    //     axios
+    //         .get("http://localhost:8080/api/meetingrooms")
+    //         .then((response) => {
+    //             setRoomData(response.data); // Lưu dữ liệu vào state
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching room data:", error);
+    //         });
+    // }, []);
 
     const handleAddRoom = (newRoomData) => {
         console.log("New Room Added:", newRoomData);
@@ -30,7 +44,7 @@ const RoomController = () => {
                     )}
                 </div>
                 <div className="p-3">
-                    <RoomTable />
+                    <RoomTable/>
                 </div>
             </div>
         </div>

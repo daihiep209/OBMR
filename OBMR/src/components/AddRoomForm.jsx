@@ -12,10 +12,38 @@ const AddRoomForm = ({ onClose, onSubmit }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Kiểm tra tính hợp lệ của dữ liệu
+    if (!formData.name || !formData.capacity) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/meetingrooms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const newRoomData = await response.json();
+        onSubmit(newRoomData);
+        onClose();
+      } else if (response.status === 403) {
+        setError("You don't have permission to add a room.");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "An error occurred while adding the room.");
+      }
+    } catch (error) {
+      setError("An unexpected error occurred. Please try again.");
+    }
     console.log("New Room Data:", formData);
-    onSubmit(formData); // Gửi dữ liệu lên parent component
     onClose(); // Đóng form
   };
 

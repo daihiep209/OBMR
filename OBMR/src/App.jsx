@@ -1,55 +1,44 @@
-import React, { useState, useEffect } from "react";
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
+// Import các component của bạn
+import Login from './pages/Login/Login';
+import Register from './pages/Login/Register';
+import Booking from './pages/Booking';
+import SendCode from './pages/Login/SendCode';
+import ResetPass from './pages/Login/ResetPass';
+import ForgotPassword from './components/Login/ForgetPasswordForm'; // Đảm bảo đã tạo component này
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [rooms, setRooms] = useState([]); // State để lưu danh sách phòng họp
-
-  // Gọi API từ backend khi component được render lần đầu
-  useEffect(() => {
-    fetch("http://localhost:8080/view") // Endpoint API từ Spring Boot
-      .then((response) => response.json())
-      .then((data) => setRooms(data)) // Gán dữ liệu nhận được vào state
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-
   return (
-    <>
+    <Router>
+      {/* Định nghĩa các route */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/sendcode" element={<SendCode />} />
+        <Route path="/resetpassword" element={<ResetPass />} />
+      </Routes>
+    </Router>
+  );
+}
+
+function Home() {
+  return (
+    <div>
+      <h2>Welcome to the Home Page</h2>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Link to="/login">Login</Link> |{" "}
+        <Link to="/register">Register</Link> |{" "}
+        <Link to="/booking">Booking</Link> |{" "}
+        <Link to="/forgot-password">Forgot Password</Link> |{" "}
+        <Link to="/sendcode">Send Code</Link> |{" "}
+        <Link to="/resetpassword">Reset Password</Link>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <div className="rooms-list">
-        <h2>Meeting Rooms:</h2>
-        {rooms.length > 0 ? (
-          <ul>
-            {rooms.map((room) => (
-              <li key={room.id}>{room.name}</li> // Hiển thị danh sách phòng họp
-            ))}
-          </ul>
-        ) : (
-          <p>Loading rooms...</p> // Hiển thị khi đang tải dữ liệu
-        )}
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 

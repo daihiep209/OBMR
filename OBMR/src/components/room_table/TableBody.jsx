@@ -1,4 +1,41 @@
-const TableBody = ({ tableData, columns }) => {
+import { useState } from "react";
+import DeleteRoomModal from "../deleteRoomModal";
+import EditRoomModal from "../editRoomModal";
+
+const TableBody = ({ tableData, columns, onDelete }) => {
+    const [selectedRoom, setSelectedRoom] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const handleEditRoom = (roomId) => {
+        // const roomToEdit = rooms.find(room => room.id === roomId);
+        setSelectedRoom(roomId);
+        setShowEditModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowEditModal(false);
+    };
+
+    const handleSubmitRoom = (updatedRoom) => {
+        setRooms(rooms.map(room => room.id === updatedRoom.id ? updatedRoom : room));
+    };
+
+    const handleDeleteClick = (room) => {
+        setSelectedRoom(room);
+        setShowModal(true);
+    };
+
+    const handleCancel = () => {
+        setShowModal(false);
+        setSelectedRoom(null);
+    };
+
+    const handleDelete = (roomId) => {
+        onDelete(roomId);
+        setShowModal(false);
+    };
+
     return (
         <tbody>
             {tableData.map((data) => {
@@ -12,10 +49,25 @@ const TableBody = ({ tableData, columns }) => {
                             >{tData}</td>;
                         })}
                         <td>
-                            <button className="btn btn-action" onClick={() => onDelete(data.id)}>
+                            {/* Render DeleteRoomModal when showModal is true */}
+                            {showModal && (
+                                <DeleteRoomModal
+                                    room={selectedRoom}
+                                    onDelete={handleDelete}
+                                    onCancel={handleCancel}
+                                />
+                            )}
+                            <button className="btn btn-action" onClick={() => handleDeleteClick(data)}>
                                 <i className="fa-solid fa-trash"></i>
                             </button>
-                            <button className="btn btn-action ms-1" onClick={() => onEdit(data.id)}>
+                            {showEditModal && (
+                                <EditRoomModal
+                                    room={selectedRoom}
+                                    onClose={handleCloseModal}
+                                    onSubmit={handleSubmitRoom}
+                                />
+                            )}
+                            <button className="btn btn-action ms-1" onClick={() => handleEditRoom(data.id)}>
                                 <i className="fa-solid fa-pen"></i>
                             </button>
                         </td>
