@@ -28,6 +28,12 @@ function Register() {
 
         const { username, email, phoneNumber, password, confirmPassword } = formData;
 
+	// Kiểm tra username không chứa dấu cách
+        if (/\s/.test(username)) {
+            setError('Username must not contain spaces');
+            return;
+        }
+
         // Kiểm tra số điện thoại chỉ chứa số
         if (!/^\d+$/.test(phoneNumber)) {
             setError('Phone number must contain only numbers');
