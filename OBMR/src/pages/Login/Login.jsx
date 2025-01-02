@@ -12,6 +12,12 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+   // Danh sách tài khoản cục bộ
+  const localUsers = [
+    { email: 'user1@example.com', password: 'Password123!' },
+    { email: 'user2@example.com', password: 'SecurePass456!' },
+  ];
+
   // Toggle mật khẩu hiển thị
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -51,35 +57,60 @@ function Login() {
     setIsLoading(true);
 
     // Gửi yêu cầu đăng nhập tới server
-    axios.post('http://localhost:8080/api/login', {
-      username: formData.email,
-      password: formData.password,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    })
-      .then(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Login successful!',
-          text: response.data.greetingMessage || 'Welcome back!',
-        });
-        navigate('/home');
-      })
-      .catch(error => {
-        const message = error.response?.data?.message || 'Something went wrong!';
-        setError(message);
-        Swal.fire({
-          icon: 'error',
-          title: 'Login failed',
-          text: message,
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
+//    axios.post('http://localhost:8080/api/login', {
+//      username: formData.email,
+//      password: formData.password,
+//    }, {
+//      headers: {
+//        'Content-Type': 'application/json',
+//      },
+//      withCredentials: true,
+//    })
+//      .then(response => {
+//       Swal.fire({
+//          icon: 'success',
+//          title: 'Login successful!',
+//         text: response.data.greetingMessage || 'Welcome back!',
+//        });
+//        navigate('/home');
+//      })
+//     .catch(error => {
+//        const message = error.response?.data?.message || 'Something went wrong!';
+//        setError(message);
+//        Swal.fire({
+//          icon: 'error',
+//          title: 'Login failed',
+//         text: message,
+//       });
+//      })
+//      .finally(() => {
+//        setIsLoading(false);
+//      });
+//  };
+
+  // Xác thực cục bộ
+    const user = localUsers.find(
+      (u) => u.email === formData.email && u.password === formData.password
+    );
+
+    if (user) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Login successful!',
+        text: 'Welcome back!',
       });
+      navigate('/home');
+    } else {
+      const message = 'Invalid username or password';
+      setError(message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Login failed',
+        text: message,
+      });
+    }
+
+    setIsLoading(false);
   };
 
   return (
