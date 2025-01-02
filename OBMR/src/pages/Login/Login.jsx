@@ -16,6 +16,7 @@ function Login() {
   const localUsers = [
     { email: 'user1@example.com', password: 'Password123!' },
     { email: 'user2@example.com', password: 'SecurePass456!' },
+    { email: 'Dinh@gmail', password: 'Dinh@123'},
   ];
 
   // Toggle mật khẩu hiển thị
